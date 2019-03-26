@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/circularMenu.js"></script>
+    <style type="text/css">
+        @charset "UTF-8";
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,input,textarea,p,th,hr,button { margin:0;padding:0; }
+        body {color:#333;font-size:12px;font-family: "宋体";height:auto;background-color:#fff;}
+        ol,ul,dl { list-style: none;}
+        img{ vertical-align: middle;-ms-interpolation-mode: bicubic; }
+        .submenu{ width: 100%}
+        .submenu a{  width: 16%; float: left; margin: 0 2%; list-style: none; }
+        .submenu a:nth-child(2n){ margin-top: 20px;}
+        .submenu a:nth-child(3n){ margin-top: 40px;}
+        .submenu a img{ width: 100%; height: 100%;}
+        .submenu a p{ text-align: center; line-height: 28px; font-size: 12px;  }
+        .clear{ clear: both; }
+        .con1{ display: block;}
+        .con2,.con3,.con4,.con5,.con6,.con7,.con8,.con9,.con10{ display: none;}
+    </style>
+</head>
+<body>
+       <div id="mybodywith" style="width: 98%;margin: 1%;" >
+             <canvas id="main"></canvas>
+             <div style="width:100%;">
+                 <div class="con1">
+                     <div class="submenu clear">
+                         <a>
+                             <p><img src="../Image/icon_dynamic.png"/></p>
+                             <p>休假1</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_mobile.png"/></p>
+                             <p>休假2</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_video.png"/></p>
+                             <p>休假3</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_dynamic.png"/></p>
+                             <p>休假4</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_mobile.png"/></p>
+                             <p>休假5</p>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="con2">
+                     <div class="submenu clear">
+                         <a>
+                             <p><img src="../Image/icon_dynamic.png"/></p>
+                             <p>培训1</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_mobile.png"/></p>
+                             <p>培训2</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_video.png"/></p>
+                             <p>培训3</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_dynamic.png"/></p>
+                             <p>培训4</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_mobile.png"/></p>
+                             <p>培训5</p>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="con3">
+                     <div class="submenu clear">
+                         <a>
+                             <p><img src="../Image/icon_dynamic.png"/></p>
+                             <p>上班1</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_mobile.png"/></p>
+                             <p>上班2</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_video.png"/></p>
+                             <p>上班3</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_dynamic.png"/></p>
+                             <p>上班4</p>
+                         </a>
+                         <a>
+                             <p><img src="../Image/icon_mobile.png"/></p>
+                             <p>上班5</p>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="con4">
+                     统计内容
+                 </div>
+                 <div class="con5">
+                     加班内容
+                 </div>
+                 <div class="con6">
+                     日志内容
+                 </div>
+                 <div class="con7">
+                     事假内容
+                 </div>
+                 <div class="con8">
+                     值班内容
+                 </div>
+                 <div class="con9">
+                     下班内容
+                 </div>
+                 <div class="con10">
+                     出差内容
+                 </div>
+             </div>
+       </div>
+</body>
+<script>
+    var mybodywith=document.getElementById("mybodywith");
+    var main=document.getElementById("main");
+    main.width=mybodywith.offsetWidth;
+    main.height=main.width;
+    var bb=myMenu.initMenue(main);
+    var cc=["business","closed","duty",'leave','log','overtime','statistics','work','train','vacation'];
+    var defaultIcon=[];
+    var loginIcon="../Image/logo.png";
+    for(var m=0;m<10;m++) {
+        defaultIcon.push("../Image/icon_default_" + cc[m] + ".png");
+    }
+    var aaa=main.width *0.46;
+    var data=
+    {
+        icon:{
+            defaultIcon:defaultIcon,
+            loginIcon:loginIcon
+        },
+        redius:{
+            bigradius:aaa,
+            middleradius:aaa/2,
+            middle2radius:aaa/2 *5/6,
+            smallradius:aaa/2 *5/6 *0.9
+        },
+        color:{
+            bigBgcolor:"#f3f3f3",
+            middle1Bgcolor:"#e9e9e9",
+            middle2Bgcolor:"#fff",
+            smallBgcolor:"#f4f4f4",
+            divideline:"#bfbfbf",
+            selectline:"#fff"
+        }
+    }
+    bb.setOption(data);
+    myMenu.on("click",function(selectMenue){
+        showsubmenu(selectMenue)
+    });
+    function showsubmenu(selectMenue){
+        for(var i=1;i<defaultIcon.length+1;i++){
+            var image=document.getElementsByClassName("con"+i)[0];
+            if(i==selectMenue){
+                image.style.display="block";
+            }else{
+                image.style.display="none";
+            }
+        }
+    }
+</script>
+</html>
